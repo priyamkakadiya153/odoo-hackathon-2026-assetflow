@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <!-- Extension of the main Dashboard template to append maintenance widgets -->
+    <t t-inherit="assetflow.DashboardTemplate" t-inherit-mode="extension">
+        <!-- Part 1: Add Maintenance KPI Cards -->
+        <xpath expr="//div[hasclass('o_kpi_grid')]" position="inside">
+            <div class="o_kpi_card">
+                <div class="o_kpi_icon_wrapper yellow">
+                    <i class="oi oi-alert"></i>
+                </div>
+                <div class="o_kpi_details">
+                    <span class="o_kpi_value">5</span>
+                    <span class="o_kpi_label">Pending Requests</span>
+                </div>
+            </div>
+            <div class="o_kpi_card">
+                <div class="o_kpi_icon_wrapper blue">
+                    <i class="oi oi-check"></i>
+                </div>
+                <div class="o_kpi_details">
+                    <span class="o_kpi_value">2</span>
+                    <span class="o_kpi_label">Approved Requests</span>
+                </div>
+            </div>
+            <div class="o_kpi_card">
+                <div class="o_kpi_icon_wrapper red">
+                    <i class="oi oi-wrench"></i>
+                </div>
+                <div class="o_kpi_details">
+                    <span class="o_kpi_value">3</span>
+                    <span class="o_kpi_label">In Progress</span>
+                </div>
+            </div>
+            <div class="o_kpi_card">
+                <div class="o_kpi_icon_wrapper green">
+                    <i class="oi oi-check-circle"></i>
+                </div>
+                <div class="o_kpi_details">
+                    <span class="o_kpi_value">4</span>
+                    <span class="o_kpi_label">Resolved Today</span>
+                </div>
+            </div>
+        </xpath>
+
+        <!-- Part 2 & 3: Add Today's Repairs Panel & Maintenance Status Widget -->
+        <xpath expr="//div[hasclass('o_dashboard_booking_grid')]" position="after">
+            <div class="o_dashboard_maintenance_grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                <!-- Today's Repairs Panel -->
+                <section class="o_repairs_section" style="background: var(--o-view-background, #ffffff); padding: 20px; border-radius: 6px; border: 1px solid #dee2e6;">
+                    <h2 class="o_section_title" style="font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; color: #495057;">Today's Repairs</h2>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-sm" style="width: 100%; font-size: 0.85rem; border-collapse: collapse; margin-bottom: 0;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid #dee2e6; text-align: left; color: #6c757d;">
+                                    <th style="padding: 6px 0;">Asset</th>
+                                    <th style="padding: 6px 0;">Technician</th>
+                                    <th style="padding: 6px 0;">Priority</th>
+                                    <th style="padding: 6px 0;">Status</th>
+                                    <th style="padding: 6px 0;">Expected</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #dee2e6;">
+                                    <td style="padding: 8px 0; font-weight: 600;">Projector AF-0056</td>
+                                    <td style="padding: 8px 0;">Amit Sharma</td>
+                                    <td style="padding: 8px 0;"><span class="badge bg-warning text-dark" style="font-size: 0.7rem; padding: 2px 4px; border-radius: 3px;">High</span></td>
+                                    <td style="padding: 8px 0;"><span class="badge bg-danger" style="font-size: 0.7rem; padding: 2px 4px; border-radius: 3px; color: white;">In Progress</span></td>
+                                    <td style="padding: 8px 0; color: #6c757d;">Today 4:00 PM</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #dee2e6;">
+                                    <td style="padding: 8px 0; font-weight: 600;">Laptop AF-0089</td>
+                                    <td style="padding: 8px 0;">Raj Patel</td>
+                                    <td style="padding: 8px 0;"><span class="badge bg-danger" style="font-size: 0.7rem; padding: 2px 4px; border-radius: 3px; color: white;">Critical</span></td>
+                                    <td style="padding: 8px 0;"><span class="badge bg-primary" style="font-size: 0.7rem; padding: 2px 4px; border-radius: 3px; color: white;">Approved</span></td>
+                                    <td style="padding: 8px 0; color: #6c757d;">Tomorrow</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #dee2e6;">
+                                    <td style="padding: 8px 0; font-weight: 600;">Smart TV AF-0112</td>
+                                    <td style="padding: 8px 0;">John Doe</td>
+                                    <td style="padding: 8px 0;"><span class="badge bg-secondary" style="font-size: 0.7rem; padding: 2px 4px; border-radius: 3px; color: white;">Medium</span></td>
+                                    <td style="padding: 8px 0;"><span class="badge bg-success" style="font-size: 0.7rem; padding: 2px 4px; border-radius: 3px; color: white;">Resolved</span></td>
+                                    <td style="padding: 8px 0; color: #6c757d;">Completed 11:30 AM</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Maintenance Status Summary Widget -->
+                <section class="o_maintenance_status_section" style="background: var(--o-view-background, #ffffff); padding: 20px; border-radius: 6px; border: 1px solid #dee2e6;">
+                    <h2 class="o_section_title" style="font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; color: #495057;">Status Summary</h2>
+                    
+                    <div class="o_status_summary_list" style="display: flex; flex-direction: column; gap: 12px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid #f8f9fa;">
+                            <span style="font-weight: 600; color: #495057;">Pending Requests</span>
+                            <span class="badge bg-warning text-dark" style="font-size: 0.85rem; padding: 4px 8px; border-radius: 4px; font-weight: bold;">5</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid #f8f9fa;">
+                            <span style="font-weight: 600; color: #495057;">Approved Requests</span>
+                            <span class="badge bg-primary" style="font-size: 0.85rem; padding: 4px 8px; border-radius: 4px; font-weight: bold; color: white;">2</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid #f8f9fa;">
+                            <span style="font-weight: 600; color: #495057;">Rejected Requests</span>
+                            <span class="badge bg-secondary" style="font-size: 0.85rem; padding: 4px 8px; border-radius: 4px; font-weight: bold; color: white;">1</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid #f8f9fa;">
+                            <span style="font-weight: 600; color: #495057;">In Progress</span>
+                            <span class="badge bg-danger" style="font-size: 0.85rem; padding: 4px 8px; border-radius: 4px; font-weight: bold; color: white;">3</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 600; color: #495057;">Resolved (Overall)</span>
+                            <span class="badge bg-success" style="font-size: 0.85rem; padding: 4px 8px; border-radius: 4px; font-weight: bold; color: white;">12</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </xpath>
+    </t>
+</templates>

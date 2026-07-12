@@ -32,10 +32,8 @@ Key Foundations Established:
         'views/transfer_views.xml',
         'views/notification_views.xml',
         'views/booking_views.xml',
-<<<<<<< Updated upstream
-=======
         'views/maintenance_views.xml',
->>>>>>> Stashed changes
+        'views/audit_views.xml',
         'views/dashboard.xml',
         'views/root_menu.xml',
         'views/menu.xml',
@@ -46,10 +44,8 @@ Key Foundations Established:
             'assetflow/static/src/js/dashboard.js',
             'assetflow/static/src/xml/dashboard_templates.xml',
             'assetflow/views/dashboard_booking.xml',
-<<<<<<< Updated upstream
-=======
             'assetflow/views/maintenance_dashboard.xml',
->>>>>>> Stashed changes
+            'assetflow/views/audit_dashboard.xml',
         ],
     },
     'installable': True,
