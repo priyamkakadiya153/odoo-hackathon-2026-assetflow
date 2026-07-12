@@ -1,26 +1,24 @@
 # -*- coding: utf-8 -*-
-from odoo import http
+from odoo import http, _
+from odoo.addons.auth_signup.controllers.main import AuthSignupHome
+from odoo.exceptions import UserError
 from odoo.http import request
 
-class AssetFlowController(http.Controller):
-    """
-    AssetFlow Controller Foundation.
-    Provides standard base endpoints for session management, dynamic attributes, 
-    and hooks that other developers can use for dashboard statistics API requests.
-    """
+class AssetFlowAuthSignupHome(AuthSignupHome):
+    
+    def do_signup(self, qcontext):
+        # Prevent self-elevation of roles and force employee constraints
+        qcontext['role'] = 'employee'
+        qcontext['status'] = 'active'
+        
+        # If department was sent in context, ignore it for security 
+        # (Admins or Dept Heads will assign departments later)
+        if 'department_id' in qcontext:
+            del qcontext['department_id']
+            
+        super(AssetFlowAuthSignupHome, self).do_signup(qcontext)
 
-    @http.route('/assetflow/session_info', type='json', auth='user', methods=['POST'])
-    def session_info(self):
-        """Returns the current logged-in employee profile information."""
-        user = request.env.user
-        return {
-            'uid': user.id,
-            'name': user.name,
-            'email': user.login,
-            'role': user.role,
-            'status': user.status,
-            'department': {
-                'id': user.department_id.id,
-                'name': user.department_id.name
-            } if user.department_id else None
-        }
+    @http.route('/web/reset_password', type='http', auth='public', website=True, sitemap=False)
+    def web_auth_reset_password(self, *args, **kw):
+        # Standard forgot password preparation hooks
+        return super(AssetFlowAuthSignupHome, self).web_auth_reset_password(*args, **kw)
